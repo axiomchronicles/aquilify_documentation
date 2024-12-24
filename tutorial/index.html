@@ -1,0 +1,1733 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Aquilify is an ASGI (Asynchronous Server Gateway Interface) framework designed to facilitate the development of web applications with Python.">
+      
+      
+      
+        <link rel="canonical" href="https://aquilify.vvfin.in/tutorial/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../curd/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Tutorial - AQUILIFY</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#writing-your-first-aquilify-app" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="AQUILIFY" class="md-header__button md-logo" aria-label="AQUILIFY" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AQUILIFY
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tutorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/embrake/aquilify" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embrake/aquilify
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AQUILIFY" class="md-nav__button md-logo" aria-label="AQUILIFY" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AQUILIFY
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/embrake/aquilify" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embrake/aquilify
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Tutorial
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Tutorial
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-first-aquilify-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing your first Aquilify app ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a project ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-development-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      The development server¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-your-first-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your first view ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-argument-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule() argument: path
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-argument-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule() argument: endpoint ¶
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="rule() argument: endpoint ¶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task Management:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-setup-the-electrus-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's setup the Electrus Database.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing more views ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetching-and-displaying-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fetching and Displaying Tasks:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it Works:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendering-the-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rendering the Page:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-a-nutshell" class="md-nav__link">
+    <span class="md-ellipsis">
+      In a Nutshell:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-add-some-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's add some more views
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Let's add some more views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aquilify-provides-a-inbuilt-serializer-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aquilify provides a inbuilt serializer &amp; validator.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a Task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-and-saving-the-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing and Saving the Task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-to-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving to the Database:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating more views.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-complete_task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps in complete_task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-delete_task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps in delete_task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      What’s next? ¶
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curd-Tutorial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Request
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../websocket/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Websocket
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../middleware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Middleware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-first-aquilify-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing your first Aquilify app ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a project ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-development-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      The development server¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-your-first-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your first view ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-argument-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule() argument: path
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-argument-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule() argument: endpoint ¶
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="rule() argument: endpoint ¶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task Management:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-setup-the-electrus-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's setup the Electrus Database.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing more views ¶
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetching-and-displaying-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fetching and Displaying Tasks:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it Works:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendering-the-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rendering the Page:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-a-nutshell" class="md-nav__link">
+    <span class="md-ellipsis">
+      In a Nutshell:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-add-some-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's add some more views
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Let's add some more views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aquilify-provides-a-inbuilt-serializer-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aquilify provides a inbuilt serializer &amp; validator.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a Task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-and-saving-the-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing and Saving the Task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-to-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving to the Database:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-more-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating more views.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-complete_task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps in complete_task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-delete_task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps in delete_task:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      What’s next? ¶
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Tutorial</h1>
+
+<h3 id="writing-your-first-aquilify-app">Writing your first Aquilify app ¶</h3>
+<p>Let’s learn by example.</p>
+<p>Throughout this tutorial, we’ll walk you through the creation of a basic Todo application.</p>
+<ul>
+<li>A public site that lets people view todo and vote in them.</li>
+</ul>
+<p>We’ll assume you have Aquilify installed already. You can tell Aquilify is installed and which version by running the following command in a shell prompt (indicated by the $ prefix):</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>aquilify<span class="w"> </span>--version
+</code></pre></div>
+<p>If Aquilify is installed, you should see the version of your installation. If it isn’t, you’ll get an error telling “No module named aquilify.</p>
+<p>This tutorial is written for Aquilify 1.14, which supports Python 3.10 and later. If the Aquilify version doesn’t match, you can refer to the tutorial for your version of Aquilify by using the version switcher at the bottom right corner of this page, or update Aquilify to the newest version. If you’re using an older version of Python, check What Python version can I use with Aquilify? to find a compatible version of Aquilify.</p>
+<p>See How to install Aquilify for advice on how to remove older versions of Aquilify and install a newer one.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Where to get help:</p>
+<p>If you’re having trouble going through this tutorial, please head over to the Getting Help section of the FAQ.</p>
+</div>
+<h2 id="creating-a-project">Creating a project ¶</h2>
+<p>If this is your first time using Aquilify, you’ll have to take care of some initial setup. Namely, you’ll need to auto-generate some code that establishes a Aquilify project – a collection of settings for an instance of Aquilify, Aquilify-specific options and application-specific settings.</p>
+<p>From the command line, cd into a directory where you’d like to store your code, then run the following command:</p>
+<p><div class="highlight"><pre><span></span><code>$<span class="w"> </span>aquilify<span class="w"> </span>create-app
+</code></pre></div>
+Then it ask to name you app in this case we naming todo then it ask for setup Electrus ( Optional ) either select YES or NO.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><b>Note</b></p>
+<p>You’ll need to avoid naming projects after built-in Python or Aquilify components. In particular, this means you should avoid using names like <b>aquilify</b> (which will conflict with Aquilify itself) or <b>test</b> (which conflicts with a built-in Python package).</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p><b>Where should this code live?</b></p>
+<p>If your background is in plain old PHP (with no use of modern frameworks), you’re probably used to putting code under the web server’s document root (in a place such as <b>/var/www</b>). With Aquilify, you don’t do that. It’s not a good idea to put any of this Python code within your web server’s document root, because it risks the possibility that people may be able to view your code over the web. That’s not good for security.</p>
+<p>Put your code in some directory <b>outside</b> of the document root, such as <b>/home/mycode</b>.</p>
+</div>
+<p>Let’s look at what <b>aquilify</b> created:</p>
+<p><div class="highlight"><pre><span></span><code>todo/
+<span class="w">    </span>app/
+<span class="w">        </span>__init__.py
+<span class="w">        </span>app.py
+<span class="w">    </span>lifespan/
+<span class="w">        </span>__init__.py
+<span class="w">    </span>__init__.py
+<span class="w">    </span>__root__.py
+<span class="w">    </span>asgi.py
+<span class="w">    </span>tools.py
+<span class="w">    </span>models.py
+<span class="w">    </span>settings.py
+<span class="w">    </span>routing.py
+<span class="w">    </span>views.py
+<span class="w">    </span>packlib.lxe
+<span class="w">    </span>config.cfg
+</code></pre></div>
+These files are:</p>
+<ul>
+<li>
+<p>The outer <b>todo/</b> root directory is a container for your project. Its name doesn’t matter to Aquilify you can rename it to anything you like.</p>
+</li>
+<li>
+<p><b>todo/app</b>: A dynamic routing directory using Aquilify <b>Schematic</b> inside the <b>todo/app/main.py</b> some codes were auto generated for configuration of <b>Schematic</b>.</p>
+</li>
+<li>
+<p><b>todo/<strong>init</strong>.py</b>: An empty file that tells Python that this directory should be considered a Python package. If you’re a Python beginner, read more about packages in the official Python docs.</p>
+</li>
+<li>
+<p><b>todo/<strong>root</strong>.py</b>: Main pipline for your application flow it controls the entire application inside the <strong>root</strong>.py and variable defined called <strong>instance</strong> it's the main entry-point for you application to connect with web.</p>
+</li>
+<li>
+<p><b>todo/settings.py</b>: Settings/configuration for this Aquilify project. Aquilify settings will tell you all about how settings work.</p>
+</li>
+<li>
+<p><b>todo/routing.py</b>: The URL declarations for this Aquilify project; a “table of contents” of your Aquilify-powered site. You can read more about URLs in URL dispatcher.</p>
+</li>
+<li>
+<p><b>todo/views.py</b>: The views.py is file where you can define all you views.</p>
+</li>
+<li>
+<p><b>todo/packlib.lxe</b>: This file contain pipline releated to your project, if you made any further changes it may reflect to your project and maybe it broke the entire project.</p>
+</li>
+<li>
+<p><b>todo/config.cfg</b>: This file contain data releated to your <b>APPLICATION</b> &amp; <b>ASGI_SERVER</b> there are two block do not make changes to the AQUILIFY block, and for ASGI_SERVER block by default it uses NETIX asgi web server you may configure it to either UVICORN or NETIX, support for more web server's soon...</p>
+</li>
+</ul>
+<h2 id="the-development-server">The development server¶</h2>
+<p>Let’s verify your Aquilify project works. Change into the outer todo directory, if you haven’t already, and run the following commands:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>aquilify<span class="w"> </span>runserver
+</code></pre></div>
+<p>You’ll see the following output on the command line:</p>
+<div class="highlight"><pre><span></span><code><span class="o">*</span> <span class="n">Starting</span> <span class="n">Netix</span> <span class="n">v1</span><span class="mf">.12</span> <span class="p">(</span><span class="n">cpython</span> <span class="mf">3.11.6</span><span class="p">,</span> <span class="n">linux</span><span class="p">)</span>
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="n">Options</span><span class="p">:</span>
+<span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">reuse_port</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">worker_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">asgi</span><span class="p">:</span><span class="n">app</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="o">--------------------------------</span> <span class="o">---------------------------------------</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mi">22</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">18</span><span class="p">]</span> <span class="n">Starting</span> <span class="n">Netix</span> <span class="k">as</span> <span class="n">an</span> <span class="n">ASGI</span> <span class="n">server</span> <span class="k">for</span><span class="p">:</span> <span class="n">Aquilify</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mi">22</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="mi">079</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">lifespan</span><span class="p">:</span> <span class="n">startup</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mi">22</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="mi">080</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">lifespan</span><span class="o">.</span><span class="n">startup</span><span class="o">.</span><span class="n">complete</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mi">22</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span> <span class="n">Netix</span> <span class="p">(</span><span class="n">ASGI</span><span class="p">)</span> <span class="p">(</span><span class="n">pid</span> <span class="mi">18513</span><span class="p">)</span> <span class="ow">is</span> <span class="n">started</span> <span class="n">at</span> <span class="mf">127.0.0.1</span> <span class="n">port</span> <span class="mi">8000</span>
+</code></pre></div>
+<p>You’ve started the Aquilify development server, a fullstack web server written purely in Python. We’ve included this with Aquilify so you can develop things rapidly, without having to deal with configuring a production server – such as Apache – until you’re ready for production.</p>
+<p>Now that the server’s running, visit http://127.0.0.1:8000/ with your web browser. You’ll see a “Congratulations!” page, with a rocket taking off. It worked!</p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>By default, the runserver command starts the development server on the internal IP at port 8000.</p>
+<p>If you want to change the server’s port, open the config.cfg and inside the <b>ASGI_SERVER</b> block change the port. For instance, this command starts the server on port 8000:</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">[</span>ASGI_SERVER<span class="o">]</span>
+<span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8080</span><span class="w"> </span>
+</code></pre></div>
+If you want to change the server’s IP, pass it along with the port. For example, to listen on all available public IPs (which is useful if you are running Vagrant or want to show off your work on other computers on the network), use:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>ASGI_SERVER<span class="o">]</span>
+<span class="nv">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.0.0.0
+</code></pre></div>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Automatic reloading of runserver</p>
+<p>The development server automatically reloads Python code for each request as needed. You don’t need to restart the server for code changes to take effect. However, some actions like adding files don’t trigger a restart, so you’ll have to restart the server in these cases.</p>
+</div>
+<h2 id="write-your-first-view">Write your first view ¶</h2>
+<p>Let’s write the first view. Open the file todos/views.py and put the following Python code in it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># todo/views.py</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, world. You&#39;re at the todo index.&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>This is the simplest view possible in Aquilify. To call the view, we need to map it to a URL - and for this we need a URLconf.</p>
+<p>To create a URLconf in the todo directory, open a file called routing.py.</p>
+<p>In the <b>todo/routing.py</b> file include the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aquilify.core.routing</span> <span class="kn">import</span> <span class="n">rule</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">ROUTER</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Index Route&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>You have now wired an index view into the URLconf. Verify it’s working with the following command:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>aquilify<span class="w"> </span>runserver
+</code></pre></div>
+<p>Go to <span style="color:green; text-decoration: underline;"><a href="http://localhost:8000/">http://localhost:8000/</a></span>
+in your browser, and you should see the text “Hello, world. You’re at the todo index.”, which you defined in the index view.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p><b>Page not found?</b></p>
+<p>If you get an error page here, check that you’re going to <span style="color:green; text-decoration: underline;"><a href="http://localhost:8000/">http://localhost:8000/</a></span> not in any other route.</p>
+</div>
+<p>The <b>rule()</b> function is passed six arguments, two required: <b>path</b> and <b>endpoint</b>, and other's are optional: kwargs, and name. At this point, it’s worth reviewing what these arguments are for.</p>
+<h2 id="rule-argument-path"><b>rule() argument: path</b></h2>
+<p>path is a string that contains a URL pattern. When processing a request, Aquilify starts at the first pattern in ROUTING and makes its way down the list, comparing the requested URL against each pattern until it finds one that matches.</p>
+<h2 id="rule-argument-endpoint"><b>rule() argument: endpoint ¶</b></h2>
+<p>When Aquilify finds a matching pattern, it calls the specified view function with an Request object as the first argument and any “captured” values from the route as keyword arguments. We’ll give an example of this in a bit.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Overview</p>
+<p>The application consists of Python code for handling CRUD operations (Create, Read, Update, Delete) for tasks. It includes functionalities to add, complete, and delete tasks.</p>
+</div>
+<h3 id="task-management">Task Management:</h3>
+<ul>
+<li>TaskSchema: Defines the schema for a task using Aquilify's serializer to validate task-related data such as the task name, status, and due date.</li>
+<li>get_total_tasks_count(): Asynchronously retrieves the total count of tasks from the database.
+    CRUD Operations:</li>
+<li>index(request): Retrieves paginated tasks and prepares the context for rendering on the UI. It retrieves tasks based on pagination parameters (page number and items per page).</li>
+<li>add_task(request): Adds a new task to the database. Validates and processes task data received from the form submission.</li>
+<li>complete_task(task_id): Marks a specific task as completed in the database.</li>
+<li>delete_task(task_id): Deletes a task from the database.</li>
+</ul>
+<h3 id="lets-setup-the-electrus-database"><b>Let's setup the <span><a href="">Electrus</a></span> Database.</b></h3>
+<ul>
+<li>
+<p>create a new file called db.py <b>todo/db.py</b>.</p>
+</li>
+<li>
+<p>Next add these few lines of code in you previously created <b>todo/db.py</b>:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">electrus.asynchronous</span> <span class="kn">import</span> <span class="n">Electrus</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Electron</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;Todos&#39;</span><span class="p">]</span>
+
+<span class="n">todos_collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;mytodo&#39;</span><span class="p">]</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Electrus, a micro JSON Database built on Electron and written purely in Python, stands out for its simplicity, offering swift installation, seamless configuration, and rapid data processing. It efficiently stores data in JSON format, leveraging its simplicity to provide faster processing compared to SQL or ORM databases. Its user-friendly interface makes it exceptionally easy to use, making it a highly recommended choice for development purposes.</p>
+<p>A Basic usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">electrus.asynchronous</span>  <span class="kn">import</span> <span class="n">Electrus</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Electrus</span><span class="p">()</span>
+<span class="c1"># if your setting.py configured with the Electrus database,</span>
+<span class="c1"># then you don&#39;t need to pass any arguments in the Electrus() class</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;Test&#39;</span><span class="p">]</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;mycollection&#39;</span><span class="p">]</span>
+
+<span class="c1"># basic operations...</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="k">await</span> <span class="n">collection</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1234</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Testuser&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;test@user.com&quot;</span><span class="p">}</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># -&gt; return Document(**colonID) string</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="k">await</span> <span class="n">collection</span><span class="o">.</span><span class="n">find_one</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;01fc8s1f9sa0rv1s0a45fsv0S&quot;</span><span class="p">}</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># -&gt; return Document(**data) dict</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="k">await</span> <span class="n">collection</span><span class="o">.</span><span class="n">update_one</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;01fc8s1f9sa0rv1s0a45fsv0S&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;$set&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;new_data&quot;</span><span class="p">:</span> <span class="s2">&quot;my_new_data&quot;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># -&gt; return Document(**colonID) string</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="k">await</span> <span class="n">collection</span><span class="o">.</span><span class="n">delete_one</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;01fc8s1f9sa0rv1s0a45fsv0S&quot;</span><span class="p">}</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># -&gt; return Document(**colonID) string</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">asynio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+</div>
+<p>With these changes you are connected with the <b>Electrus</b> Database. for more infor visit: <span><a href="http://electrus.vvfin.in/operations">http://electrus.vvfin.in/operations</a></span></p>
+<h2 id="writing-more-views"><b>Writing more views ¶</b></h2>
+<p>Now let’s add a few more views to todo/views.py. These views are slightly different, because they take an argument:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span> 
+    <span class="n">Dict</span><span class="p">,</span> 
+    <span class="n">List</span><span class="p">,</span> 
+    <span class="n">Union</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">aquilify.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">aquilify.responses</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_total_tasks_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">todos_collection</span><span class="o">.</span><span class="n">count_documents</span><span class="p">({})</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResponse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">items_per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+        <span class="n">total_tasks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_total_tasks_count</span><span class="p">()</span>
+        <span class="n">all_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">todos_collection</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">())</span>
+
+        <span class="n">start_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="p">(</span><span class="n">page_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">items_per_page</span>
+        <span class="n">end_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">items_per_page</span>
+        <span class="n">paginated_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">all_tasks</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]</span>
+
+        <span class="n">context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;todos&quot;</span><span class="p">:</span> <span class="n">paginated_tasks</span><span class="p">,</span>
+            <span class="s2">&quot;pagination&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;total_tasks&quot;</span><span class="p">:</span> <span class="n">total_tasks</span><span class="p">,</span>
+                <span class="s2">&quot;page&quot;</span><span class="p">:</span> <span class="n">page_number</span><span class="p">,</span>
+                <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">items_per_page</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Invalid page or limit value provided: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Failed to fetch todos: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you have like setup the CSRF or XSRF security add these following lines of code:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aquilify.decorators.csrf</span> <span class="kn">import</span> <span class="n">protect</span>
+
+<span class="nd">@protect</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResponse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">items_per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</code></pre></div></p>
+</div>
+<p>Now let's configure the Template settings in <b>settings.py</b></p>
+<div class="highlight"><pre><span></span><code><span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;BACKEND&quot;</span><span class="p">:</span> <span class="s2">&quot;aquilify.template.jinja2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DIRS&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;templates&quot;</span><span class="p">)</span> <span class="p">],</span>
+        <span class="s2">&quot;OPTIONS&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;autoscape&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;context_processors&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;aquilify.template.context_processors.URLContextProcessor&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aquilify.core.messages.context_processors.Messages&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aquilify.template.context_processors.RequestContext&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;aquilify.template.extensions.URLConstructor&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>if you setup CSRF then update the settings.py with these changes:
+<div class="highlight"><pre><span></span><code><span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;BACKEND&quot;</span><span class="p">:</span> <span class="s2">&quot;aquilify.template.jinja2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DIRS&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;templates&quot;</span><span class="p">)</span> <span class="p">],</span>
+        <span class="s2">&quot;CSRF&quot;</span><span class="p">:</span> <span class="s2">&quot;aquilify.security.csrf.CSRF&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;OPTIONS&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;autoscape&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;context_processors&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;aquilify.template.context_processors.URLContextProcessor&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aquilify.template.context_processors.CSRFContextView&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aquilify.core.messages.context_processors.Messages&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aquilify.template.context_processors.RequestContext&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;aquilify.template.extensions.URLConstructor&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">CSRF</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;BACKEND&quot;</span><span class="p">:</span> <span class="s2">&quot;aquilify.security.csrf.CSRF&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;OPTIONS&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;secret_key&quot;</span><span class="p">:</span> <span class="n">SECRET_KEY</span><span class="p">,</span>
+            <span class="s2">&quot;ip_verification&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;trusted_ips&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;protected_methods&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;cookie_options&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;httponly&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;secure&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;samesite&quot;</span><span class="p">:</span> <span class="s1">&#39;strict&#39;</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></p>
+</div>
+<p>current <b>Aquilify</b> only support the jinja2 template as template engine,
+update the <b>DIRS</b> with the actual directory where you want's to park you html code.</p>
+<p>Now update the <b>routing.py with the changed URLs Configuration:</b>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aquilify.core.routing</span> <span class="kn">import</span> <span class="n">rule</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">ROUTER</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Index Route&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div></p>
+<p>Now let's create a <b>todo/templates/index.html</b> and add the following code:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>TODO App<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;style.css&#39;) }}&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>TODO App<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;task-list&quot;</span><span class="p">&gt;</span>
+            {% for todo in todos %}
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;task-item&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ todo.task }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Status: {{ todo.status }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Due Date: {{ todo.due_date }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;task-actions&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;redirect&#39;, location=&#39;/complete/&#39; + todo._id) }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-complete&quot;</span><span class="p">&gt;</span>Complete<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;redirect&#39;, location=&#39;/delete/&#39; + todo._id) }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-delete&quot;</span><span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pagination&quot;</span><span class="p">&gt;</span>
+            {% if pagination %}
+                {% if pagination.page &gt; 1 %}
+                    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;?page={{ pagination.page - 1 }}&amp;limit={{ pagination.limit }}&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                {% endif %}
+                {% for page_num in range(1, (pagination.total_tasks // pagination.limit) + 2) %}
+                    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;?page={{ page_num }}&amp;limit={{ pagination.limit }}&quot;</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">page_num </span><span class="o">=</span><span class="s">=</span> <span class="na">pagination</span><span class="err">.</span><span class="na">page</span> <span class="err">%}</span><span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;</span>{{ page_num }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                {% endfor %}
+                {% if pagination.page * pagination.limit <span class="p">&lt;</span> <span class="nt">pagination.total_tasks</span> <span class="err">%}</span>
+                    <span class="err">&lt;</span><span class="na">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;?page={{ pagination.page + 1 }}&amp;limit={{ pagination.limit }}&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                {% endif %}
+            {% endif %}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;redirect&#39;, location=&#39;/add&#39; )}}&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;task-form&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;task&quot;</span><span class="p">&gt;</span>Task:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;task&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;task&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;status&quot;</span><span class="p">&gt;</span>Status:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;status&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;status&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;due_date&quot;</span><span class="p">&gt;</span>Due Date:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;date&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;due_date&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;due_date&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+For stylesheet visit: <span style="color:green; text-decoration: underline;"><a href="http://aquilify.vvfin.in/tutorial/static/stylesheet.css">http://aquilify.vvfin.in/tutorial/static/stylesheet.css</a></span></p>
+<ul>
+<li>
+<h2 id="fetching-and-displaying-tasks">Fetching and Displaying Tasks:</h2>
+<p>It helps display tasks (to-dos) on a web page in parts (pagination).
+Retrieves tasks from a database and presents a certain number of tasks per page.</p>
+</li>
+<li>
+<h2 id="how-it-works">How it Works:</h2>
+<div class="highlight"><pre><span></span><code>It receives a request containing page number and items per page information.
+Retrieves the total number of tasks available.
+Grabs the tasks for the requested page from the database.
+Prepares these tasks along with pagination details for display.
+</code></pre></div>
+</li>
+<li>
+<h2 id="error-handling">Error Handling:</h2>
+<div class="highlight"><pre><span></span><code>It checks for potential issues like invalid page or limit values.
+If there are problems, it sends an error message.
+It also catches any other unexpected errors and provides a suitable error response.
+</code></pre></div>
+</li>
+<li>
+<h2 id="rendering-the-page">Rendering the Page:</h2>
+<div class="highlight"><pre><span></span><code>Once everything is in order, it constructs the information needed for the web page.
+Utilizes a rendering function to display this information in an HTML template.
+</code></pre></div>
+</li>
+<li>
+<h2 id="in-a-nutshell">In a Nutshell:</h2>
+<div class="highlight"><pre><span></span><code>This code helps get tasks from a database and show them on a web page.
+It manages how many tasks to display per page and handles errors that might occur during this process.
+</code></pre></div>
+</li>
+</ul>
+<h2 id="lets-add-some-more-views"><b>Let's add some more views</b></h2>
+<ul>
+<li>Creating a <b>add_task</b> view.</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">aquilify.responses</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">aquilify.core.backend.serializer</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">FieldValidationError</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="k">class</span> <span class="nc">TaskSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">task</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">due_date</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">add_task</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResponse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">task_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">TaskSchema</span><span class="p">()</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">())</span>
+        <span class="n">task_data</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y, %H:%M:%S&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">todos_collection</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">task_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Task added successfully!&#39;</span><span class="p">})</span>
+
+    <span class="k">except</span> <span class="n">FieldValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Failed to add task field: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Failed to add task: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</code></pre></div>
+Now update the <b>routing.py</b> with the updated changes:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aquilify.core.routing</span> <span class="kn">import</span> <span class="n">rule</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">ROUTER</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Index Route&#39;</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/add&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">add_task</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Adding Todos&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The Schema class stands at the core of the serializer functionality, allowing seamless serialization and deserialization operations through its loads and dumps functions, accepting the data argument. Notably, it offers an array of built-in fields like String, Integer, and more, streamlining the process of defining data structures and facilitating serialization effortlessly.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">aquilify.backend.serializer</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">FieldValidationError</span>
+
+<span class="k">class</span> <span class="nc">Users</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="s2">&quot;Username field is required!&quot;</span><span class="p">})</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;validation&quot;</span><span class="p">:</span> <span class="s1">&#39;Invalid email format!&#39;</span><span class="p">})</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Password</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">special_chars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;validation&#39;</span><span class="p">:</span> <span class="s2">&quot;Invalid password format!&quot;</span><span class="p">})</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="c1"># Due to it&#39;s asynchnorous nature you must have to await it.</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;myusername&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;demo@gmail.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;demo@1234&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Users</span><span class="p">()</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c1"># print the serialized data</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Users</span><span class="p">()</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c1"># print the deserialized data</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+</div>
+<h3 id="aquilify-provides-a-inbuilt-serializer-validator">Aquilify provides a inbuilt serializer &amp; validator.</h3>
+<p>TaskSchema is a set of rules defining the structure of a task.
+It ensures that a task has certain attributes (task, status, due_date) and their expected data types (str, datetime, etc.).
+<b>fields.String()</b> and <b>fields.Date()</b> define the expected types for each attribute.</p>
+<ul>
+<li>
+<h2 id="adding-a-task">Adding a Task:</h2>
+<p>This code snippet handles adding a new task to a database.
+It receives a request and extracts data from the form submitted in that request.
+Validates this data against the TaskSchema rules to ensure it meets the required structure.</p>
+</li>
+<li>
+<h2 id="processing-and-saving-the-task">Processing and Saving the Task:</h2>
+<div class="highlight"><pre><span></span><code>After validating the task data, it adds a timestamp for the task creation (created_at).
+The current timestamp is generated using datetime.now().strftime() to represent the current date and time in a specific format (&quot;%m/%d/%Y, %H:%M:%S&quot;).
+This timestamp is added to the task data.
+</code></pre></div>
+</li>
+<li>
+<h2 id="saving-to-the-database">Saving to the Database:</h2>
+<div class="highlight"><pre><span></span><code>Attempts to insert the validated and timestamped task data into a database (db.todos_collection.insert_one(task_data)).
+If successful, it returns a success message as a JsonResponse ({&#39;message&#39;: &#39;Task added successfully!&#39;}).
+</code></pre></div>
+</li>
+<li>
+<h2 id="error-handling_1">Error Handling:</h2>
+<div class="highlight"><pre><span></span><code>If there are validation errors (e.g., task data doesn&#39;t match TaskSchema requirements), it catches a FieldValidationError and returns an error response with a 400 status code ({&#39;error&#39;: &#39;Failed to add task field: {error_message}&#39;}).
+If any unexpected error occurs during the addition process, it catches it as a general exception and returns a server error response with a 500 status code ({&#39;error&#39;: &#39;Failed to add task: {error_message}&#39;}).
+</code></pre></div>
+</li>
+</ul>
+<h2 id="creating-more-views"><b>Creating more views.</b></h2>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">aquilify.responses</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">complete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResponse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">todos_collection</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Completed&#39;</span><span class="p">}})</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Task marked as completed!&#39;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Task not found!&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Error marking task as completed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResponse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">todos_collection</span><span class="o">.</span><span class="n">delete_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">task_id</span> <span class="p">})</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Task deleted successfully!&#39;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Task not found!&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Error deleting task: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</code></pre></div>
+Now update the <b>routing.py</b> with the updated changes:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aquilify.core.routing</span> <span class="kn">import</span> <span class="n">rule</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">ROUTER</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Index Route&#39;</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/add&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">add_task</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Adding Todos&#39;</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/complete/</span><span class="si">{task_id}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">complete_task</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Complete Task&#39;</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;/delete/</span><span class="si">{task_id}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">views</span><span class="o">.</span><span class="n">delete_task</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Delete Taks&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div></p>
+<h2 id="steps-in-complete_task">Steps in complete_task:</h2>
+<ul>
+<li>
+<p>Updating Task Status:
+    Tries to change a task's status to 'Completed' in the database using the given task_id.
+    Checks the result of this update.</p>
+</li>
+<li>
+<p>Result Check:
+    If the task was successfully updated, it sends a message saying the task was completed.
+    If the task wasn't found, it informs that the task doesn't exist.</p>
+</li>
+<li>
+<p>Error Handling:
+    If something unexpected happens during this process, it reports an error.</p>
+</li>
+</ul>
+<h2 id="steps-in-delete_task">Steps in delete_task:</h2>
+<ul>
+<li>
+<p>Deleting Task:
+    Tries to remove the task from the database using the given task_id.
+    Checks the result of this deletion.</p>
+</li>
+<li>
+<p>Result Check:
+    If the task was successfully deleted, it sends a message confirming the deletion.
+    If the task wasn't found, it indicates that the task doesn't exist.</p>
+</li>
+<li>
+<p>Error Handling:
+    If something unexpected occurs during this process, it reports an error.</p>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This application is a fundamental example of Aquilify's capabilities. Aquilify stands out for its capacity to efficiently handle larger applications, leveraging its asynchronous nature that enables lightning-fast performance. Moreover, it excels in building robust RESTful APIs, showcasing the versatility and power of the Aquilify framework.</p>
+</div>
+<h2 id="whats-next"><b>What’s next? ¶</b></h2>
+<p>The beginner tutorial ends here. In the meantime, you might want to check out some pointers on where to go from here.</p>
+<p>If you are familiar with Python packaging and interested in learning how to turn todo into a “reusable app”, check out Advanced tutorial: How to write reusable apps.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../curd/" class="md-footer__link md-footer__link--next" aria-label="Next: Curd-Tutorial">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Curd-Tutorial
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+    
+  
+
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "navigation.footer", "navigation.tabs.sticky", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
